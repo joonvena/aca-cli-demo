@@ -1,0 +1,21 @@
+environments:
+  - name: dev
+    subscription_id: 4b549055-e193-4bc7-8e81-315e4de4ad5c
+    resource_group: container-app-test
+    container_app_name: products-api
+    container_app_environment: container-app-test
+    containers:
+      - name: postgres
+        image: postgres:latest
+        env:
+          - name: DATABASE_USER
+            value: postgres
+          - name: DATABASE_PASSWORD
+            value: postgres
+          - name: DATABASE_DB
+            value: postgres
+      - name: products-api
+        image: joonvena/product-api:latest
+        env:
+          - name: DATABASE_URL
+            value: postgres://postgres:postgres@localhost:5143/postgres

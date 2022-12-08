@@ -1,0 +1,10 @@
+version: '3.9'
+services:
+  products_db:
+    image: postgres:12.5-alpine
+    environment:
+      POSTGRES_USER: products
+      POSTGRES_PASSWORD: products
+      POSTGRES_DB: products
+    ports:
+      - 5432:5432
