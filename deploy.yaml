@@ -4,6 +4,7 @@ environments:
     resource_group: container-app-test
     container_app_name: products-api
     container_app_environment: container-app-test
+    location: westeurope
     containers:
       - name: postgres
         image: postgres:latest
