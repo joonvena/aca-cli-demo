@@ -5,6 +5,7 @@ environments:
     container_app_name: products-api
     container_app_environment: container-app-test
     location: westeurope
+    target_port: 8080
     containers:
       - name: postgres
         image: postgres:latest
