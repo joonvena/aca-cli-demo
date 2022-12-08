@@ -10,11 +10,11 @@ environments:
       - name: postgres
         image: postgres:latest
         env:
-          - name: DATABASE_USER
+          - name: POSTGRES_USER
             value: postgres
-          - name: DATABASE_PASSWORD
+          - name: POSTGRES_PASSWORD
             value: postgres
-          - name: DATABASE_DB
+          - name: POSTGRES_DB
             value: postgres
       - name: products-api
         image: joonvena/product-api:latest
