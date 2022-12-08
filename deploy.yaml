@@ -21,3 +21,5 @@ environments:
         env:
           - name: DATABASE_URL
             value: postgres://postgres:postgres@localhost:5143/postgres
+          - name: ALLOW_ORIGINS
+            value: "*"
