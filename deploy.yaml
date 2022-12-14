@@ -1,14 +1,28 @@
 environments:
   - name: dev
     subscription_id: 4b549055-e193-4bc7-8e81-315e4de4ad5c
-    resource_group: container-app-test
-    container_app_name: products-api
-    container_app_environment: container-app-test
     location: westeurope
-    target_port: 8080
+    resource_group: container-app-test
+    container_app_name: products-api-2
+    container_app_environment: container-app-test
+    registries:
+      - server: ghcr.io
+        username: joonvena
+        PasswordSecretRef: ghcr-io-registry-credentials
     containers:
+      - name: products-api
+        image: joonvena/aca-cli-demo:$tag
+        env:
+          - name: DATABASE_URL
+            value: postgres://postgres:postgres@localhost:5432/postgres
+          - name: ALLOW_ORIGINS
+            value: "*"
+          - name: SUPER_SECRET
+            secretRef: super-secret
+          - name: SUPER_SECRET2
+            secretRef: super-secret-2
       - name: postgres
-        image: postgres:latest
+        image: postgres:alpine3.17
         env:
           - name: POSTGRES_USER
             value: postgres
@@ -16,10 +30,10 @@ environments:
             value: postgres
           - name: POSTGRES_DB
             value: postgres
-      - name: products-api
-        image: joonvena/product-api:latest
-        env:
-          - name: DATABASE_URL
-            value: postgres://postgres:postgres@localhost:5432/postgres
-          - name: ALLOW_ORIGINS
-            value: "*"
+
+  - name: staging
+    subscription_id: 4b549055-e193-4bc7-8e81-315e4de4ad5c
+    location: westeurope
+    resource_group: container-app-test
+    container_app_name: postgres
+    container_app_environment: container-app-test
