@@ -1,5 +1,8 @@
-name: Review
-on: [pull_request]
+name: Staging
+on:
+  push:
+    branches:
+      - master
 
 env:
   AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
@@ -36,4 +39,4 @@ jobs:
       - name: deploy
         uses: ./deploy
         with:
-          environment: 'dev'
+          environment: 'staging'
