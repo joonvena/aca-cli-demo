@@ -1,0 +1,18 @@
+name: Cleanup
+on:
+  pull_request:
+    types: [closed]
+
+env:
+  AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+  AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    container: joonvena/aca-cli:latest
+    name: Cleanup review environment
+    steps:
+      - run: |
+          /aca-cli delete -e review -a products-api-review-${{ github.event.number }}

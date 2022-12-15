@@ -40,9 +40,3 @@ jobs:
           /aca-cli deploy -e review -a products-api-review-${{ github.event.number }}
       - name: Print FQDN
         run: echo "Environment FQDN is ${{ steps.deploy.outputs.fqdn }}"
-  cleanup:
-    if: github.event.pull_request.action == 'closed'
-    runs-on: ubuntu-latest
-    container: joonvena/aca-cli:latest
-    steps: 
-      - run: echo "This would get run on cleanup!"
