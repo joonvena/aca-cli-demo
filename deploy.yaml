@@ -1,5 +1,5 @@
 environments:
-  - name: dev
+  - name: review
     subscription_id: 4b549055-e193-4bc7-8e81-315e4de4ad5c
     location: westeurope
     resource_group: container-app-test
