@@ -30,13 +30,19 @@ jobs:
           tags: joonvena/aca-cli-demo:${{ github.sha }}
   deploy:
     runs-on: ubuntu-latest
+    container: joonvena/aca-cli:latest
     needs: [build]
     steps:
       - uses: actions/checkout@v2
-      - name: deploy
+      - name: Deploy
         id: deploy
-        uses: ./deploy
-        with:
-          environment: 'dev'
+        run: |
+          /aca-cli deploy -e review -a products-api-review-${{ github.event.number }}
       - name: Print FQDN
         run: echo "Environment FQDN is ${{ steps.deploy.outputs.fqdn }}"
+  cleanup:
+    if: github.event.pull_request.action == 'closed'
+    runs-on: ubuntu-latest
+    container: joonvena/aca-cli:latest
+    steps: 
+      - run: echo "This would get run on cleanup!"
