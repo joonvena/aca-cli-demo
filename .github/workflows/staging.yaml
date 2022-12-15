@@ -35,6 +35,7 @@ jobs:
           tags: joonvena/aca-cli-demo:${{ github.sha }}
   deploy:
     runs-on: ubuntu-latest
+    container: joonvena/aca-cli:latest
     needs: [build]
     steps:
       - uses: actions/checkout@v2
