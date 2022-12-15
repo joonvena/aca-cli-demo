@@ -14,5 +14,6 @@ jobs:
     container: joonvena/aca-cli:latest
     name: Cleanup review environment
     steps:
+      - uses: actions/checkout@v2
       - run: |
           /aca-cli delete -e review -a products-api-review-${{ github.event.number }}
