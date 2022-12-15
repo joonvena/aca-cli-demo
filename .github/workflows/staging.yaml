@@ -8,6 +8,8 @@ env:
   AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
   AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
   AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+  SUPER_SECRET: ${{ secrets.SUPER_SECRET }}
+  SUPER_SECRET2: ${{ secrets.SUPER_SECRET2 }}
 
 jobs:
   build:
@@ -36,7 +38,9 @@ jobs:
     needs: [build]
     steps:
       - uses: actions/checkout@v2
-      - name: deploy
-        uses: ./deploy
-        with:
-          environment: 'staging'
+      - name: Deploy
+        id: deploy
+        run: |
+          /aca-cli deploy -e staging
+      - name: Print FQDN
+        run: echo "Environment FQDN is ${{ steps.deploy.outputs.fqdn }}"
