@@ -34,6 +34,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: deploy
+        id: deploy
         uses: ./deploy
         with:
           environment: 'dev'
+      - name: Print FQDN
+        run: echo "Environment FQDN is ${{ steps.deploy.outputs.fqdn }}"
